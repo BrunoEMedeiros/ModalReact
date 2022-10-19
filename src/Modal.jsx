@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { ModalContext } from "./context";
 import { Container, Header, Content, Overlay, Campo } from "./style"
+import { AiFillCloseCircle } from 'react-icons/ai'
 
 export function Modal(){
 
@@ -16,12 +17,15 @@ export function Modal(){
 
     if(isOpen){
         switch(modalType){
-            case 1:
+            case 'alert':
                 return(
                 <Overlay id="fundo" onClick={()=> setIsOpen(false)}>
                 <Container>
                     <Header>
                         <h2>{modalTitle}</h2>
+                        <button onClick={()=> setIsOpen(prevState => !prevState)}>
+                            <AiFillCloseCircle />
+                        </button>
                     </Header>
                     <Content>
                         <h3>

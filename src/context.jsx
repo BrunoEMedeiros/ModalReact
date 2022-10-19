@@ -19,8 +19,8 @@ export const ModalProvider = ({children}) =>{
 
     const[isOpen, setIsOpen] = useState(false);
 
-    const[modalType, setModalType] = useState(1);
-    const[modalTitle, setModalTitle] = useState('Iam the modal');
+    const[modalType, setModalType] = useState('alert');
+    const[modalTitle, setModalTitle] = useState('Warning');
     const[modalFields, setModalFields] = useState([]);
 
     return(

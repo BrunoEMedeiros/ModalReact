@@ -7,9 +7,10 @@ export const Overlay = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
+    //box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 
     display: flex;
     justify-content: center;
@@ -19,11 +20,12 @@ export const Overlay = styled.div`
 export const Container = styled.div`
 
     background-color: whitesmoke;
-    border-radius: 20px;
+    border-radius: 16px;
 
     padding: 10px;
     
-    box-shadow: 1px 1px 8px 3px rgba(0,0,0,0.55);
+    border: 1px solid black;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 
 `;
 
@@ -31,6 +33,7 @@ export const Header = styled.header`
 
     display: flex;
     justify-content: center;
+
 
 `;
 

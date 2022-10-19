@@ -1,23 +1,37 @@
 
-import { Container, Header, Content, Overlay } from "./style"
+import { useContext } from "react";
+import { ModalContext } from "./context";
+import { Container, Header, Content, Overlay, Campo } from "./style"
 
-export function Modal({open, close}){
+export function Modal(){
 
-    if(!open) return null
+    const { 
+        isOpen, setIsOpen,
+        modalType, setModalType,
+        modalTitle,
+        modalFields, setModalFields 
+      } = useContext(ModalContext);
 
-    if(open){
-    return(
-        <Overlay id="fundo" onClick={()=> close(false)}>
-            <Container id="modal">
-                <Header>
-                    <h2>Iam the Modal</h2>
-                </Header>
-                <Content>
-                    <button onClick={()=> close(prevState => !prevState)}>
-                        Close
-                    </button>
-                </Content>
-            </Container>
-        </Overlay>
-    )
+    if(!isOpen) return null
+
+    if(isOpen){
+        switch(modalType){
+            case 1:
+                return(
+                <Overlay id="fundo" onClick={()=> setIsOpen(false)}>
+                <Container>
+                    <Header>
+                        <h2>{modalTitle}</h2>
+                    </Header>
+                    <Content>
+                        <h3>
+                            Modal body
+                        </h3>
+                        <button onClick={()=> setIsOpen(prevState => !prevState)}>
+                            Close
+                        </button>
+                    </Content>
+                </Container>
+            </Overlay>)
+        }
 }}

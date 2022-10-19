@@ -27,11 +27,30 @@ export const Container = styled.div`
 
 `;
 
-export const Header = styled.header``;
+export const Header = styled.header`
+
+    display: flex;
+    justify-content: center;
+
+`;
 
 export const Content = styled.div`
 
     display: flex;
     justify-content: center;
 
+`;
+
+export const Campo = styled.input.attrs({
+    type: 'text',
+    value: 'Submit'
+})`
+    width: 100%;
+    
+    padding: 2rem;
+    background: #E6E6E6;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.5);
+    font-size: 20px;
 `;

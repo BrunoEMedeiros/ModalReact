@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useContext } from 'react';
+import { ModalContext } from './context';
 import { Modal } from './Modal'
 
 export function App() {
 
-  const[isOpen, setIsOpen] = useState(false)
+  const { setIsOpen } = useContext(ModalContext);
 
   return (
     <>
@@ -13,7 +14,7 @@ export function App() {
       }>
         Open
       </button>
-      <Modal open={isOpen} close={setIsOpen} />
+      <Modal />
     </>
   )
 }

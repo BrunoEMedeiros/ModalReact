@@ -1,8 +1,9 @@
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ModalContext } from "./context";
-import { Container, Header, Content, Overlay, Campo } from "./style"
+import { Container, Header, Content, Overlay, Campo, BotaoFechar, Buttons, Alert } from "./style"
 import { AiFillCloseCircle } from 'react-icons/ai'
+import { TbAlertTriangle } from 'react-icons/tb'
 
 export function Modal(){
 
@@ -10,7 +11,8 @@ export function Modal(){
         isOpen, setIsOpen,
         modalType, setModalType,
         modalTitle,
-        modalFields, setModalFields 
+        modalFields, setModalFields,
+        modalMsg
       } = useContext(ModalContext);
 
     if(!isOpen) return null
@@ -19,23 +21,51 @@ export function Modal(){
         switch(modalType){
             case 'alert':
                 return(
-                <Overlay id="fundo" onClick={()=> setIsOpen(false)}>
-                <Container>
-                    <Header>
-                        <h2>{modalTitle}</h2>
-                        <button onClick={()=> setIsOpen(prevState => !prevState)}>
-                            <AiFillCloseCircle />
-                        </button>
-                    </Header>
-                    <Content>
-                        <h3>
-                            Modal body
-                        </h3>
-                        <button onClick={()=> setIsOpen(prevState => !prevState)}>
-                            Close
-                        </button>
-                    </Content>
-                </Container>
-            </Overlay>)
+                <Overlay id="fundo">
+                    <Container>
+                        <Header>
+                            <Alert>
+                                <TbAlertTriangle />
+                                <strong>{modalTitle}</strong>
+                            </Alert>
+                            <BotaoFechar onClick={()=> setIsOpen(prevState => !prevState)}>
+                                <AiFillCloseCircle />
+                            </BotaoFechar>
+                        </Header>
+                        <Content>
+                        <small>
+                                {modalMsg}
+                        </small>
+                        </Content>
+                    </Container>
+                </Overlay>
+                )
+            case 'add':
+                return(
+                    <Overlay id="fundo">
+                    <Container>
+                        <Header>
+                            <Alert>
+                                <strong>{modalTitle}</strong>
+                            </Alert>
+                            <BotaoFechar onClick={()=> setIsOpen(prevState => !prevState)}>
+                                <AiFillCloseCircle />
+                            </BotaoFechar>
+                        </Header>
+                        <Content>
+                            {
+                                modalFields.map((data)=>(
+                                    <Campo type="text" placeholder={data.campo}/>
+                                ))
+                            }
+                        </Content>
+                        <Buttons>
+                            <button>
+                                Salvar
+                            </button>
+                        </Buttons>
+                    </Container>
+                </Overlay>
+                )
         }
 }}

@@ -1,19 +1,19 @@
 
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { ModalContext } from "./context";
 import { Container, Header, Content, Overlay, Campo, BotaoFechar, Buttons, Alert } from "./style"
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { TbAlertTriangle } from 'react-icons/tb'
 
-export function Modal(){
+export function Modal({ save, edit, delet }){
 
     const { 
         isOpen, setIsOpen,
-        modalType, setModalType,
+        modalType,
         modalTitle,
-        modalFields, setModalFields,
+        modalFields,
         modalMsg
-      } = useContext(ModalContext);
+    } = useContext(ModalContext);
 
     if(!isOpen) return null
 
@@ -42,7 +42,7 @@ export function Modal(){
                 )
             case 'add':
                 return(
-                    <Overlay id="fundo">
+                    <Overlay>
                     <Container>
                         <Header>
                             <Alert>
@@ -55,13 +55,73 @@ export function Modal(){
                         <Content>
                             {
                                 modalFields.map((data)=>(
-                                    <Campo type="text" placeholder={data.campo}/>
+                                    <Campo 
+                                    key={data.campo}
+                                    type="text" 
+                                    placeholder={data.campo} 
+                                    onChange={e => data.func(e.target.value)} />
                                 ))
                             }
                         </Content>
                         <Buttons>
-                            <button>
+                            <button onClick={()=> {save()}}>
                                 Salvar
+                            </button>
+                        </Buttons>
+                    </Container>
+                </Overlay>
+                )
+            case 'edit':
+                return(
+                    <Overlay>
+                    <Container>
+                        <Header>
+                            <Alert>
+                                <strong>{modalTitle}</strong>
+                            </Alert>
+                            <BotaoFechar onClick={()=> setIsOpen(prevState => !prevState)}>
+                                <AiFillCloseCircle />
+                            </BotaoFechar>
+                        </Header>
+                        <Content>
+                            {
+                                modalFields.map((data)=>(
+                                    <Campo 
+                                    key={data.campo}
+                                    type="text" 
+                                    placeholder={data.valor} 
+                                    onChange={e => data.func(e.target.value)} />
+                                ))
+                            }
+                        </Content>
+                        <Buttons>
+                            <button onClick={()=> {edit()}}>
+                                Salvar
+                            </button>
+                        </Buttons>
+                    </Container>
+                </Overlay>
+                )
+            case 'delete':
+                return(
+                <Overlay id="fundo">
+                    <Container>
+                        <Header>
+                            <Alert>
+                                <strong>{modalTitle}</strong>
+                            </Alert>
+                            <BotaoFechar onClick={()=> setIsOpen(prevState => !prevState)}>
+                                <AiFillCloseCircle />
+                            </BotaoFechar>
+                        </Header>
+                        <Content>
+                        <small>
+                                {modalMsg}
+                        </small>
+                        </Content>
+                        <Buttons>
+                            <button onClick={()=> {delet()}}>
+                                Excluir
                             </button>
                         </Buttons>
                     </Container>

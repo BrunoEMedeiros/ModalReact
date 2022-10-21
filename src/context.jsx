@@ -22,7 +22,8 @@ export const ModalProvider = ({children}) =>{
     const[modalType, setModalType] = useState('alert');
     const[modalTitle, setModalTitle] = useState('Warning');
     const[modalFields, setModalFields] = useState([]);
-    const[modalMsg, setModalMsg] = useState('default msg')
+    const[modalMsg, setModalMsg] = useState('default msg');
+    const[id, setId] = useState(0);
 
     return(
         <ModalContext.Provider value={{ 
@@ -30,7 +31,8 @@ export const ModalProvider = ({children}) =>{
             modalType, setModalType, 
             modalTitle, setModalTitle, 
             modalFields, setModalFields,
-            modalMsg, setModalMsg
+            modalMsg, setModalMsg,
+            id, setId
         }}>
             {children}
         </ModalContext.Provider>
